@@ -1,0 +1,292 @@
+2016-12-02 14:24:39,470 - gn - INFO - Entering: main
+2016-12-02 14:24:39,471 - gn - INFO - Entering: get_url_content
+2016-12-02 14:24:39,471 - gn - INFO - Parsing URL: https://www.google.co.in/search?q=apple stock&client=ubuntu&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=ZexAWJLdJcjwvgTN75nYBA&start=0&sa=N
+2016-12-02 14:24:39,471 - gn - INFO - Waiting for 6 seconds before hitting the URL
+2016-12-02 14:24:47,276 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:24:47,276 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:24:47,300 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:24:47,300 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:24:47,300 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:24:47,300 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:24:47,300 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:24:47,300 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:24:47,301 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:24:47,301 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:24:47,306 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:24:47,306 - gn - INFO - Entering: get_url_content
+2016-12-02 14:24:47,306 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=MNR&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=1TZBWKrJI8jYvASmxregCQ&start=10&sa=N
+2016-12-02 14:24:47,306 - gn - INFO - Waiting for 7 seconds before hitting the URL
+2016-12-02 14:24:55,116 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:24:55,117 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:24:55,160 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:24:55,161 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:24:55,161 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:24:55,161 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:24:55,161 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:24:55,169 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:24:55,169 - gn - INFO - Entering: get_url_content
+2016-12-02 14:24:55,169 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=o2l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=3jZBWNKQGZGOvQT19qWICQ&start=20&sa=N
+2016-12-02 14:24:55,170 - gn - INFO - Waiting for 5 seconds before hitting the URL
+2016-12-02 14:25:00,946 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:00,947 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:00,978 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:00,978 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:00,978 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:00,979 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:00,979 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:00,984 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:00,984 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:00,984 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=u2l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=5DZBWKj-EYbovgSOxozIAw&start=30&sa=N
+2016-12-02 14:25:00,984 - gn - INFO - Waiting for 3 seconds before hitting the URL
+2016-12-02 14:25:04,776 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:04,776 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:04,794 - gn - WARNING - Date not found: 'NoneType' object has no attribute 'get_text'
+2016-12-02 14:25:04,795 - gn - INFO - Exception content: <div class="s"><div><div class="th _lyb _YQd" style="height:65px;width:116px"><a data-ved="0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhC4AggcMAA" href="https://www.youtube.com/watch?v=bC2-QFcSkiM" onmousedown="return rwt(this,'','','','31','AFQjCNH2d2yy1JdpKElFd3Pt_z5bw1P6Cw','','0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhC4AggcMAA','','',event)"><g-img class="_ygd"><img alt="Video for apple stock" class="_WCg" height="87" id="vidthumb1" onload="google.aft&amp;&amp;google.aft(this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="top:-11px" width="116"/></g-img><span class="vdur _dwc">▶ 3:33</span></a></div></div><div style="margin-left:125px"><div class="f kv _SWb" style="white-space:nowrap"><cite class="_Rm">https://www.youtube.com/watch?v=bC2-QFcSkiM</cite></div><div class="f slp">Jan 1, 2014 - Uploaded by primaveppy</div><span class="st">First time out for this one! Can you tell? No idea what Huggy's up to!</span></div><div style="clear:left"></div></div>
+2016-12-02 14:25:04,795 - gn - INFO - Trying alternate approach to get Date.
+2016-12-02 14:25:04,795 - gn - WARNING - Date not found: 'NoneType' object has no attribute 'get_text'
+2016-12-02 14:25:04,796 - gn - INFO - Exception content: <div class="s"><div><div class="th _lyb _YQd" style="height:65px;width:116px"><a data-ved="0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhC4AggfMAE" href="https://www.youtube.com/watch?v=L5GU2tWXPTw" onmousedown="return rwt(this,'','','','32','AFQjCNGizF3Gi65oq2mAlF8CLh7Y5WuAJQ','','0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhC4AggfMAE','','',event)"><g-img class="_ygd"><img alt="Video for apple stock" class="_WCg" height="87" id="vidthumb2" onload="google.aft&amp;&amp;google.aft(this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="top:-11px" width="116"/></g-img><span class="vdur _dwc">▶ 6:19</span></a></div></div><div style="margin-left:125px"><div class="f kv _SWb" style="white-space:nowrap"><cite class="_Rm">https://www.youtube.com/watch?v=L5GU2tWXPTw</cite><div class="action-menu ab_ctl"><a aria-expanded="false" aria-haspopup="true" aria-label="Result details" class="_Fmb ab_button" data-ved="0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhDsHQggMAE" href="#" id="am-b31" jsaction="m.tdd;keydown:m.hbke;keypress:m.mskpe" role="button"><span class="mn-dwn-arw"></span></a><div class="action-menu-panel ab_dropdown" data-ved="0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhCpHwghMAE" jsaction="keydown:m.hdke;mouseover:m.hdhne;mouseout:m.hdhue" role="menu" tabindex="-1"><ol><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="/search?client=ubuntu&amp;hs=y2l&amp;channel=fs&amp;biw=1095&amp;bih=915&amp;noj=1&amp;q=related:https://www.youtube.com/watch%3Fv%3DL5GU2tWXPTw+apple+stock&amp;tbo=1&amp;sa=X&amp;ved=0ahUKEwjtrrrAkdXQAhUBMI8KHZpiBos4HhAfCCIwAQ">Similar</a></li></ol></div></div></div><div class="f slp">Dec 29, 2013 - Uploaded by Bryan Downing</div><span class="st">FousAlerts Trading 68,443 views.<wbr> ... App Reviews - CrazyMikesapps.com 4,651 views.<wbr> ... StockTouch Review ...</wbr></wbr></span></div><div style="clear:left"></div></div>
+2016-12-02 14:25:04,796 - gn - INFO - Trying alternate approach to get Date.
+2016-12-02 14:25:04,799 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:04,799 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:04,799 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:04,799 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:04,799 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:04,804 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:04,804 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:04,804 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=y2l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=6DZBWO2aBIHgvASaxZnYCA&start=40&sa=N
+2016-12-02 14:25:04,804 - gn - INFO - Waiting for 8 seconds before hitting the URL
+2016-12-02 14:25:13,601 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:13,601 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:13,638 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:13,638 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:13,638 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:13,639 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:13,639 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:13,646 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:13,646 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:13,646 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=Pi6&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=8DZBWOC8NofjvgTbkbbwDg&start=50&sa=N
+2016-12-02 14:25:13,646 - gn - INFO - Waiting for 4 seconds before hitting the URL
+2016-12-02 14:25:18,463 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:18,463 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:18,483 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:18,484 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:18,484 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:18,484 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:18,484 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:18,488 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:18,488 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:18,488 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=Ui6&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=9TZBWMDPLMnIvgTZ_JbwAQ&start=60&sa=N
+2016-12-02 14:25:18,488 - gn - INFO - Waiting for 8 seconds before hitting the URL
+2016-12-02 14:25:27,249 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:27,249 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:27,266 - gn - WARNING - Date not found: 'NoneType' object has no attribute 'get_text'
+2016-12-02 14:25:27,267 - gn - INFO - Exception content: <div class="s"><div><div class="f kv _SWb" style="white-space:nowrap"><cite class="_Rm">www.iphoneincanada.ca/news/<b>apple</b>-ceo-tim-cook-loses-4-million-<b>stock</b>/</cite><div class="action-menu ab_ctl"><a aria-expanded="false" aria-haspopup="true" aria-label="Result details" class="_Fmb ab_button" data-ved="0ahUKEwjRoJjLkdXQAhUGp48KHUy8DpY4PBDsHQgcMAA" href="#" id="am-b60" jsaction="m.tdd;keydown:m.hbke;keypress:m.mskpe" role="button"><span class="mn-dwn-arw"></span></a><div class="action-menu-panel ab_dropdown" data-ved="0ahUKEwjRoJjLkdXQAhUGp48KHUy8DpY4PBCpHwgdMAA" jsaction="keydown:m.hdke;mouseover:m.hdhne;mouseout:m.hdhue" role="menu" tabindex="-1"><ol><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="http://webcache.googleusercontent.com/search?q=cache:UtM8QSV3knQJ:www.iphoneincanada.ca/news/apple-ceo-tim-cook-loses-4-million-stock/+&amp;cd=61&amp;hl=en&amp;ct=clnk&amp;gl=in&amp;client=ubuntu" onmousedown="return rwt(this,'','','','61','AFQjCNE0z6XZvnIHtS_CFKcQvxh3xB9xcg','','0ahUKEwjRoJjLkdXQAhUGp48KHUy8DpY4PBAgCB4wAA','','',event)">Cached</a></li></ol></div></div></div><div class="f slp">Dec 30, 2013 - 1 post - ‎1 author</div><span class="st">However, ComputerWorld is now reporting that the board has reduced Cook's amount of vested <em>stock</em> grants by nearly $4 million, citing <em>Apple's</em> subpar ...</span></div></div>
+2016-12-02 14:25:27,267 - gn - INFO - Trying alternate approach to get Date.
+2016-12-02 14:25:27,270 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:27,270 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:27,270 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:27,270 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:27,270 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:27,274 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:27,274 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:27,274 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=di6&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=_jZBWNGpI4bOvgTM-LqwCQ&start=70&sa=N
+2016-12-02 14:25:27,274 - gn - INFO - Waiting for 8 seconds before hitting the URL
+2016-12-02 14:25:36,072 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:36,073 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:36,092 - gn - WARNING - Date not found: 'NoneType' object has no attribute 'get_text'
+2016-12-02 14:25:36,092 - gn - INFO - Exception content: <div class="s"><div><div class="f kv _SWb" style="white-space:nowrap"><cite class="_Rm bc">www.livinginkigali.com › Living in Kigali Forum › Buy, Sell &amp; Trade</cite><div class="action-menu ab_ctl"><a aria-expanded="false" aria-haspopup="true" aria-label="Result details" class="_Fmb ab_button" data-ved="0ahUKEwiTnrHPkdXQAhXHr48KHa6aDvI4RhDsHQhaMAk" href="#" id="am-b79" jsaction="m.tdd;keydown:m.hbke;keypress:m.mskpe" role="button"><span class="mn-dwn-arw"></span></a><div class="action-menu-panel ab_dropdown" data-ved="0ahUKEwiTnrHPkdXQAhXHr48KHa6aDvI4RhCpHwhbMAk" jsaction="keydown:m.hdke;mouseover:m.hdhne;mouseout:m.hdhue" role="menu" tabindex="-1"><ol><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="http://webcache.googleusercontent.com/search?q=cache:lqn5GXNNOPcJ:www.livinginkigali.com/forum/new-apple-iphone-5s-16gb-apple-iphone-5-now-available-stock-3-2392.html+&amp;cd=80&amp;hl=en&amp;ct=clnk&amp;gl=in&amp;client=ubuntu" onmousedown="return rwt(this,'','','','80','AFQjCNEUDadUk-JqMiNNA3LTeEjrS4xlaw','','0ahUKEwiTnrHPkdXQAhXHr48KHa6aDvI4RhAgCFwwCQ','','',event)">Cached</a></li><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="/search?client=ubuntu&amp;hs=AOR&amp;channel=fs&amp;biw=1095&amp;bih=915&amp;noj=1&amp;q=related:www.livinginkigali.com/forum/new-apple-iphone-5s-16gb-apple-iphone-5-now-available-stock-3-2392.html+apple+stock&amp;tbo=1&amp;sa=X&amp;ved=0ahUKEwiTnrHPkdXQAhXHr48KHa6aDvI4RhAfCF0wCQ">Similar</a></li></ol></div></div></div><div class="f slp">Dec 4, 2013 - 4 posts - ‎3 authors</div><span class="st"><em>Apple</em> iPhone 5 64Gb $320 USD <em>Apple</em> iPhone 5 32Gb $290 USD <em>Apple</em> iphone 5 16Gb $260 USD SAMSUNG GALAXY s4 :$$410 USD AVAILABLE IN <em>STOCK</em> ...</span></div></div>
+2016-12-02 14:25:36,092 - gn - INFO - Trying alternate approach to get Date.
+2016-12-02 14:25:36,093 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:36,093 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:36,093 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:36,093 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:36,093 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:36,097 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:36,097 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:36,097 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=AOR&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=BzdBWNP-FsffvgSutbqQDw&start=80&sa=N
+2016-12-02 14:25:36,097 - gn - INFO - Waiting for 7 seconds before hitting the URL
+2016-12-02 14:25:44,063 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:44,064 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:44,082 - gn - WARNING - Date not found: 'NoneType' object has no attribute 'get_text'
+2016-12-02 14:25:44,082 - gn - INFO - Exception content: <div class="s"><div><div class="f kv _SWb" style="white-space:nowrap"><cite class="_Rm bc">www.livinginkigali.com › Living in Kigali Forum › Buy, Sell &amp; Trade</cite><div class="action-menu ab_ctl"><a aria-expanded="false" aria-haspopup="true" aria-label="Result details" class="_Fmb ab_button" data-ved="0ahUKEwiM_Y7TkdXQAhVEOo8KHSSIB-Y4UBDsHQhSMAg" href="#" id="am-b88" jsaction="m.tdd;keydown:m.hbke;keypress:m.mskpe" role="button"><span class="mn-dwn-arw"></span></a><div class="action-menu-panel ab_dropdown" data-ved="0ahUKEwiM_Y7TkdXQAhVEOo8KHSSIB-Y4UBCpHwhTMAg" jsaction="keydown:m.hdke;mouseover:m.hdhne;mouseout:m.hdhue" role="menu" tabindex="-1"><ol><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="http://webcache.googleusercontent.com/search?q=cache:lqn5GXNNOPcJ:www.livinginkigali.com/forum/new-apple-iphone-5s-16gb-apple-iphone-5-now-available-stock-3-2392.html+&amp;cd=89&amp;hl=en&amp;ct=clnk&amp;gl=in&amp;client=ubuntu" onmousedown="return rwt(this,'','','','89','AFQjCNGp86aGWp-SmiDZg52D19FT8O06Bg','','0ahUKEwiM_Y7TkdXQAhVEOo8KHSSIB-Y4UBAgCFQwCA','','',event)">Cached</a></li><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="/search?client=ubuntu&amp;hs=b3l&amp;channel=fs&amp;biw=1095&amp;bih=915&amp;noj=1&amp;q=related:www.livinginkigali.com/forum/new-apple-iphone-5s-16gb-apple-iphone-5-now-available-stock-3-2392.html+apple+stock&amp;tbo=1&amp;sa=X&amp;ved=0ahUKEwiM_Y7TkdXQAhVEOo8KHSSIB-Y4UBAfCFUwCA">Similar</a></li></ol></div></div></div><div class="f slp">Dec 4, 2013 - 4 posts - ‎3 authors</div><span class="st"><em>Apple</em> iPhone 5 64Gb $320 USD <em>Apple</em> iPhone 5 32Gb $290 USD <em>Apple</em> iphone 5 16Gb $260 USD SAMSUNG GALAXY s4 :$$410 USD AVAILABLE IN <em>STOCK</em> ...</span></div></div>
+2016-12-02 14:25:44,082 - gn - INFO - Trying alternate approach to get Date.
+2016-12-02 14:25:44,083 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:44,083 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:44,083 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:44,083 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:44,083 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:44,087 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:44,087 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:44,087 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=b3l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=DzdBWMy5DMT0vASkkJ6wDg&start=90&sa=N
+2016-12-02 14:25:44,087 - gn - INFO - Waiting for 5 seconds before hitting the URL
+2016-12-02 14:25:50,000 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:50,000 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:50,032 - gn - WARNING - Date not found: 'NoneType' object has no attribute 'get_text'
+2016-12-02 14:25:50,032 - gn - INFO - Exception content: <div class="s"><div><div class="f kv _SWb" style="white-space:nowrap"><cite class="_Rm">www.jailbreakqa.com/questions/.../<b>stock</b>-<b>apple</b>-apps-are-gone-any-ideas-on-how-to-fi...</cite><div class="action-menu ab_ctl"><a aria-expanded="false" aria-haspopup="true" aria-label="Result details" class="_Fmb ab_button" data-ved="0ahUKEwio_PvVkdXQAhWDrY8KHdIyDNI4WhDsHQhDMAY" href="#" id="am-b96" jsaction="m.tdd;keydown:m.hbke;keypress:m.mskpe" role="button"><span class="mn-dwn-arw"></span></a><div class="action-menu-panel ab_dropdown" data-ved="0ahUKEwio_PvVkdXQAhWDrY8KHdIyDNI4WhCpHwhEMAY" jsaction="keydown:m.hdke;mouseover:m.hdhne;mouseout:m.hdhue" role="menu" tabindex="-1"><ol><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="http://webcache.googleusercontent.com/search?q=cache:Np-vx4Jc-zMJ:www.jailbreakqa.com/questions/209047/stock-apple-apps-are-gone-any-ideas-on-how-to-fix+&amp;cd=97&amp;hl=en&amp;ct=clnk&amp;gl=in&amp;client=ubuntu" onmousedown="return rwt(this,'','','','97','AFQjCNFU5fn7ZZHmijp1daLPDj1E24lJ3w','','0ahUKEwio_PvVkdXQAhWDrY8KHdIyDNI4WhAgCEUwBg','','',event)">Cached</a></li><li class="action-menu-item ab_dropdownitem" role="menuitem"><a class="fl" href="/search?client=ubuntu&amp;hs=h3l&amp;channel=fs&amp;biw=1095&amp;bih=915&amp;noj=1&amp;q=related:www.jailbreakqa.com/questions/209047/stock-apple-apps-are-gone-any-ideas-on-how-to-fix+apple+stock&amp;tbo=1&amp;sa=X&amp;ved=0ahUKEwio_PvVkdXQAhWDrY8KHdIyDNI4WhAfCEYwBg">Similar</a></li></ol></div></div></div><div class="f slp">Dec 25, 2013 - 1 post</div><span class="st">A couple of more <em>stock apple</em> apps had been removed. At this point I was going to restore my phone so I plugged it into my computer and openend itunes, but it ...</span></div></div>
+2016-12-02 14:25:50,032 - gn - INFO - Trying alternate approach to get Date.
+2016-12-02 14:25:50,034 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:50,034 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:50,034 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:50,034 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:50,034 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:50,038 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:50,038 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:50,038 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=h3l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=FTdBWOidC4PbvgTS5bCQDQ&start=100&sa=N
+2016-12-02 14:25:50,038 - gn - INFO - Waiting for 9 seconds before hitting the URL
+2016-12-02 14:25:59,901 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:25:59,901 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:25:59,919 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:25:59,920 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:25:59,920 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:25:59,920 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:25:59,920 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:25:59,924 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:25:59,924 - gn - INFO - Entering: get_url_content
+2016-12-02 14:25:59,924 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=YOR&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=HzdBWIblB4nzvASa9ZS4Cg&start=110&sa=N
+2016-12-02 14:25:59,924 - gn - INFO - Waiting for 3 seconds before hitting the URL
+2016-12-02 14:26:03,790 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:26:03,790 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:26:03,808 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:26:03,809 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:26:03,809 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:26:03,809 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:26:03,809 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:26:03,813 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:26:03,813 - gn - INFO - Entering: get_url_content
+2016-12-02 14:26:03,813 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=Ej6&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=IzdBWNlYjPO8BPOUh9gF&start=120&sa=N
+2016-12-02 14:26:03,813 - gn - INFO - Waiting for 7 seconds before hitting the URL
+2016-12-02 14:26:11,732 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:26:11,732 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:26:11,757 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:26:11,757 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:26:11,757 - gn - INFO - Writing to file: gweb_1480668879.csv
+2016-12-02 14:26:11,757 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:26:11,758 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:26:11,764 - gn - ERROR - Next page not found: 'NoneType' object has no attribute 'get'
+2016-12-02 14:26:11,764 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:26:11,764 - gn - INFO - Time taken: -------- 92.2938871384 seconds ----------
+2016-12-02 14:26:11,765 - gn - INFO - Exiting: main
+2016-12-02 14:30:16,225 - gn - INFO - Entering: main
+2016-12-02 14:30:16,226 - gn - INFO - Entering: get_url_content
+2016-12-02 14:30:16,226 - gn - INFO - Parsing URL: https://www.google.co.in/search?q=apple stock&client=ubuntu&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=ZexAWJLdJcjwvgTN75nYBA&start=0&sa=N
+2016-12-02 14:30:16,226 - gn - INFO - Waiting for 3 seconds before hitting the URL
+2016-12-02 14:30:21,345 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:30:21,345 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:30:21,381 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:30:21,381 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:30:21,381 - gn - INFO - Writing to file: gweb_1480669216.csv
+2016-12-02 14:30:21,381 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:30:21,381 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:30:21,381 - gn - INFO - Writing to file: gweb_1480669216.csv
+2016-12-02 14:30:21,381 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:30:21,382 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:30:21,387 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:30:21,387 - gn - INFO - Entering: get_url_content
+2016-12-02 14:30:21,387 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=37l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=IzhBWNSAE8eAvQSD3pqgCw&start=10&sa=N
+2016-12-02 14:30:21,387 - gn - INFO - Waiting for 4 seconds before hitting the URL
+2016-12-02 14:30:26,242 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:30:26,243 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:30:26,262 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:30:26,262 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:30:26,262 - gn - INFO - Writing to file: gweb_1480669216.csv
+2016-12-02 14:30:26,262 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:30:26,262 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:30:26,266 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:30:26,266 - gn - INFO - Entering: get_url_content
+2016-12-02 14:30:26,266 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=apple+stock&client=ubuntu&hs=qSR&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2013&ei=KThBWKKrH8WBvQSj9KfgCQ&start=20&sa=N
+2016-12-02 14:30:26,266 - gn - INFO - Waiting for 5 seconds before hitting the URL
+2016-12-02 14:31:55,801 - gn - INFO - Entering: main
+2016-12-02 14:31:55,802 - gn - INFO - Entering: get_url_content
+2016-12-02 14:31:55,802 - gn - INFO - Parsing URL: https://www.google.co.in/search?q=infosys stock news&client=ubuntu&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=ZexAWJLdJcjwvgTN75nYBA&start=0&sa=N
+2016-12-02 14:31:55,802 - gn - INFO - Waiting for 8 seconds before hitting the URL
+2016-12-02 14:32:04,477 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:04,477 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:04,496 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:04,496 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:04,496 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:04,496 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:04,496 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:04,496 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:04,496 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:04,497 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:04,501 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:04,501 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:04,501 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=2o6&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=izhBWPW-Nsn4vATq3aaIAg&start=10&sa=N
+2016-12-02 14:32:04,501 - gn - INFO - Waiting for 5 seconds before hitting the URL
+2016-12-02 14:32:10,100 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:10,100 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:10,119 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:10,119 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:10,119 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:10,119 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:10,120 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:10,124 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:10,124 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:10,124 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=p9l&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=kThBWIiMJMzyvATA9KPoBg&start=20&sa=N
+2016-12-02 14:32:10,124 - gn - INFO - Waiting for 9 seconds before hitting the URL
+2016-12-02 14:32:20,072 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:20,073 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:20,097 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:20,097 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:20,097 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:20,097 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:20,097 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:20,103 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:20,103 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:20,103 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=gUR&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=mzhBWJrIDcTkvATpu5CgDw&start=30&sa=N
+2016-12-02 14:32:20,103 - gn - INFO - Waiting for 7 seconds before hitting the URL
+2016-12-02 14:32:27,882 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:27,882 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:27,902 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:27,903 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:27,903 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:27,903 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:27,903 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:27,907 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:27,907 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:27,907 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=Qp6&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=ozhBWNaTC4PgvgTrhZSoAg&start=40&sa=N
+2016-12-02 14:32:27,907 - gn - INFO - Waiting for 7 seconds before hitting the URL
+2016-12-02 14:32:35,682 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:35,683 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:35,702 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:35,702 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:35,702 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:35,702 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:35,703 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:35,707 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:35,707 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:35,707 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=EAm&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=qjhBWPyyPMTsvgSn47D4Aw&start=50&sa=N
+2016-12-02 14:32:35,707 - gn - INFO - Waiting for 7 seconds before hitting the URL
+2016-12-02 14:32:43,563 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:43,563 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:43,581 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:43,582 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:43,582 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:43,582 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:43,582 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:43,586 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:43,586 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:43,586 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=MAm&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=sjhBWKK4MImAvQS63ZCwAg&start=60&sa=N
+2016-12-02 14:32:43,586 - gn - INFO - Waiting for 3 seconds before hitting the URL
+2016-12-02 14:32:47,582 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:47,582 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:47,603 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:47,603 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:47,603 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:47,603 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:47,603 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:47,607 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:47,607 - gn - INFO - Entering: get_url_content
+2016-12-02 14:32:47,607 - gn - INFO - Parsing URL: https://www.google.co.in//search?q=infosys+stock+news&client=ubuntu&hs=7UR&channel=fs&biw=1095&bih=915&noj=1&tbs=cdr:1,cd_min:01/12/2013,cd_max:31/12/2014&ei=tjhBWPjPKIXyvAS13oCoCA&start=70&sa=N
+2016-12-02 14:32:47,607 - gn - INFO - Waiting for 4 seconds before hitting the URL
+2016-12-02 14:32:52,422 - gn - INFO - Exiting: get_url_content
+2016-12-02 14:32:52,422 - gn - INFO - Entering: scrap_page_content
+2016-12-02 14:32:52,436 - gn - INFO - Exiting: scrap_page_content
+2016-12-02 14:32:52,437 - gn - INFO - Entering: write_to_csv
+2016-12-02 14:32:52,437 - gn - INFO - Writing to file: gweb_1480669315.csv
+2016-12-02 14:32:52,437 - gn - INFO - Exiting: write_to_csv
+2016-12-02 14:32:52,437 - gn - INFO - Entering: get_next_page_url
+2016-12-02 14:32:52,442 - gn - ERROR - Next page not found: 'NoneType' object has no attribute 'get'
+2016-12-02 14:32:52,442 - gn - INFO - Exiting: get_next_page_url
+2016-12-02 14:32:52,442 - gn - INFO - Time taken: -------- 56.64026618 seconds ----------
+2016-12-02 14:32:52,442 - gn - INFO - Exiting: main

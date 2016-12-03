@@ -1,0 +1,49 @@
+>>> soup = BeautifulSoup(open('inflink.htm'),'lxml')
+>>> headline = soup.find_all('a')
+
+>>> for link in headline:
+...    headers =  link.get('href')
+...    print headers
+>>> for item in soup.find_all(attrs={'class':'r'}):.............(1)
+...     for link in item.find_all('a'):
+...         print link.get('href')
+            
+>>> soup.find_all('h3', {'class':'r'})[0]
+
+https://in.finance.yahoo.com/q/hp?s=INFY.BO
+https://in.finance.yahoo.com/q?s=INFY.NS
+https://www.dynamiclevels.com/en/infosys-share-price-history
+http://www.marketonmobile.com/companies/hcl-infosys/500179
+http://www.marketonmobile.com/companies/kpit-tech/532400
+http://www.nasdaq.com/symbol/infy/dividend-history
+http://www.moneylife.in/article/infosys-stock-price-rockets-15-percentage-despite-poor-quarterly-result/33621.html
+http://performance.morningstar.com/stock/performance-return.action?p=dividend_split_page&t=INFY
+http://jairjp.com/FEBRUARY%202014/08%20KARUNA%20DHUTTI.pdf
+http://www.moneycontrol.com/financials/infosys/financial-graphs/operating-profit-ebitda-percentage/IT
+>>> soup.find_all('h3', {'class':'r'})[0].find('a').get_text()..........(1)
+>>> for head in dlink:
+...     header = head.find('a').get('href')
+...     print header
+... 
+
+result:
+	 
+(( https://in.finance.yahoo.com/q/hp?s=INFY.BO
+https://in.finance.yahoo.com/q?s=INFY.NS
+https://www.dynamiclevels.com/en/infosys-share-price-history
+http://www.marketonmobile.com/companies/hcl-infosys/500179
+http://www.marketonmobile.com/companies/kpit-tech/532400
+http://www.nasdaq.com/symbol/infy/dividend-history
+http://www.moneylife.in/article/infosys-stock-price-rockets-15-percentage-despite-poor-quarterly-result/33621.html
+http://performance.morningstar.com/stock/performance-return.action?p=dividend_split_page&t=INFY
+http://jairjp.com/FEBRUARY%202014/08%20KARUNA%20DHUTTI.pdf
+http://www.moneycontrol.com/financials/infosys/financial-graphs/operating-profit-ebitda-percentage/IT ))
+
+>>> dlink = soup.find_all('cite')
+>>> soup.find_all('cite').text
+>>> soup.find_all('span',{'class':'st'})
+>>> soup.find_all('span',{'class':'st'})[0].find('span').text
+u'Mar 29, 2014 - '
+>>> soup.find_all('span',{'class':'st'})[0].find('span').text.replace(' - ',"")
+u'Mar 29, 2014'
+
