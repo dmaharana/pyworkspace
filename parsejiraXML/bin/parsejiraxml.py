@@ -12,7 +12,7 @@ import os
 import sys
 import sqlite3
 from pathlib import Path
-import datetime
+#import datetime
 import time
 
 
@@ -472,7 +472,7 @@ def main():
     set_logging()
     log.debug('Entering main')
     global dbConn
-    dateFormat = '%Y-%m-%d %H:%M:%S'
+    dateFormat = '%Y-%m-%d %H:%M:%S %Z'
 
     jiraAttribs = ['Group', 'Project', 'ProjectRole','SchemePermissions', 'SearchRequest', 'User', 'Version', 'Workflow', 'WorkflowScheme', 'CustomField', 'FieldConfigScheme']
 
@@ -502,7 +502,7 @@ def main():
     core_app_props = get_core_app_properties(jiraXMLbackup)
     #add current date to the parsing information
     core_app_props[0].append('PARSED_DATE')
-    currentTime = datetime.datetime.fromtimestamp(time.time()).strftime(dateFormat)
+    currentTime = time.strftime(dateFormat, time.localtime())
     core_app_props[1].append(currentTime)
 
     for col in core_app_props[0]:
