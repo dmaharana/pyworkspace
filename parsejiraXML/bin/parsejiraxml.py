@@ -8,15 +8,47 @@ Created on Thu Mar  2 13:15:59 2017
 from lxml import etree
 import logging
 import configparser
-import os.path
+import os
 import sys
 import sqlite3
+from pathlib import Path
+import datetime
+import time
 
 
+def set_logging(mylogFile = '../logs/jiraxmlparse.log'):
+    global log
+
+    check_path_create_dir(mylogFile)
+
+    #mylogFile = logFile
+    # create logger
+    log = logging.getLogger(__name__)
+    log.setLevel(logging.DEBUG)
+
+    # create file handler which logs even debug messages
+    fh = logging.FileHandler(mylogFile)
+    fh.setLevel(logging.DEBUG)
+    # create console handler with a higher log level
+    ch = logging.StreamHandler()
+    #ch.setLevel(logging.INFO)
+    ch.setLevel(logging.DEBUG)
+    # create formatter and add it to the handlers
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(funcName)s - %(lineno)s - %(message)s')
+    #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(funcName)20s() - %(lineno)s - %(message)s')
+    #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    ch.setFormatter(formatter)
+    # add the handlers to the logger
+    log.addHandler(fh)
+    log.addHandler(ch)
+
+    return
 
 def read_global_constants(configFile = '../config/jiraxmlparse.ini'):
     log.debug('Entering read_global_constants')
-    if not os.path.isfile(configFile):
+    #if not os.path.isfile(configFile):
+    if not Path(configFile).is_file():
        log.critical ('{}: config file not found. Exiting...'.format(configFile))
        sys.exit()
 
@@ -49,33 +81,17 @@ def read_global_constants(configFile = '../config/jiraxmlparse.ini'):
     log.debug('Exiting read_global_constants')
     return
 
-def set_logging(mylogFile = '../logs/jiraxmlparse.log'):
-    global log
 
-    #mylogFile = logFile
-    # create logger
-    log = logging.getLogger(__name__)
-    log.setLevel(logging.DEBUG)
-
-    # create file handler which logs even debug messages
-    fh = logging.FileHandler(mylogFile)
-    fh.setLevel(logging.DEBUG)
-    # create console handler with a higher log level
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
-    # create formatter and add it to the handlers
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(funcName)s - %(lineno)s - %(message)s')
-    #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(funcName)20s() - %(lineno)s - %(message)s')
-    #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    ch.setFormatter(formatter)
-    # add the handlers to the logger
-    log.addHandler(fh)
-    log.addHandler(ch)
-
-    return
+def check_path_create_dir(filePath):
+    if os.name == 'posix' and filePath[0] == '~':
+       p = Path(filePath).expanduser()
+    else:
+       p = Path(filePath)
+    if not p.parent.is_dir():
+       p.parent.mkdir(mode = 0o777, parents = True, exist_ok = True)
 
 def get_plugins(xmlFile):
+    log.debug('Entering get_plugins')
     startTag = '___ User Plugins ____________________________'
     #systemPluginTag = '___ System Plugins __________________________'
     stopTag = '_' * 25
@@ -84,7 +100,7 @@ def get_plugins(xmlFile):
     userPluginCount = 0
     pluginList = []
     row = []
-    header = ['Name', 'Number','Version','Status','Vendor','Description']
+    header = ['Name', 'Version','Status','Vendor','Description']
     name = ''
     with open(xmlFile) as fh:
          for line in fh.readlines():
@@ -116,17 +132,20 @@ def get_plugins(xmlFile):
                    name = line.split(':')[0].strip()
 
 
-    if pluginList:
-       pluginList.insert(0,header)
     #print (userPluginCount)
     print (pluginList, len(pluginList))
 
     if not int(userPluginCount) == len(pluginList):
        print ('Error: total user plugin count "{}", does not match the count "{}" of plugin list extracted'.format(userPluginCount, len(pluginList)))
 
+    if pluginList:
+       pluginList.insert(0,header)
+
+    log.debug('Exiting get_plugins')
     return(pluginList)
 
 def get_core_app_properties(xmlFile):
+    log.debug('Entering get_core_app_properties')
     startTag = '___ Core Application Properties ____________'
     #stopTag = '___ Application Properties _________________'
     stopTag = '_' * 25
@@ -134,7 +153,7 @@ def get_core_app_properties(xmlFile):
     startCollecting = False
     propList = []
 
-    header = ['Version','Installation Type','Server ID','Base URL','External User Management']
+    header = ['Server ID', 'Base URL', 'Version', 'Installation Type', 'External User Management']
 
     with open(xmlFile) as fh:
          for line in fh.readlines():
@@ -164,9 +183,11 @@ def get_core_app_properties(xmlFile):
        propList.insert(0,header)
 
     print (propList)
+    log.debug('Exiting get_core_app_properties')
     return(propList)
 
 def get_db_stats(xmlFile):
+    log.debug('Entering get_db_stats')
     startTag = '___ Database Statistics ____________________'
     #stopTag = '___ Upgrade History ________________________'
     stopTag = '_' * 25
@@ -209,9 +230,11 @@ def get_db_stats(xmlFile):
        propList.insert(0,header)
 
     print (propList)
+    log.debug('Exiting get_db_stats')
     return(propList)
 
 def get_file_paths(xmlFile):
+    log.debug('Entering get_file_paths')
     startTag = '___ File Paths _____________________________'
     stopTag = '_' * 25
 
@@ -241,9 +264,11 @@ def get_file_paths(xmlFile):
        propList.insert(0,header)
 
     print (propList)
+    log.debug('Exiting get_file_paths')
     return(propList)
 
 def get_trusted_applications(xmlFile):
+    log.debug('Entering get_trusted_applications')
     startTag = '___ Trusted Applications ___________________'
     stopTag = '_' * 25
 
@@ -273,20 +298,40 @@ def get_trusted_applications(xmlFile):
        propList.insert(0,header)
 
     print (propList)
+    log.debug('Exiting get_trusted_applications')
     return(propList)
 
 def get_jira_attribs(jiraAttribs, xmlfile):
-
+    log.debug('Entering get_jira_attribs')
     jiraAttribsD = {}
     tree = etree.parse(xmlfile)
     for attribute in jiraAttribs:
         entries = tree.findall(attribute)
-        print (attribute)
+        log.debug (attribute)
         header = []
+        rows = []
+        row = []
         for entry in entries:
-            print(entry.attrib.keys())
-            header = list(entry.attrib.keys())
+            #log.debug(entry.attrib.keys())
+            headerT = list(entry.attrib.keys())
+            for col in headerT:
+                if col not in header:
+                   header.append(col)
 
+        for entry in entries:
+	        row = [None] * len(header)
+	        for col in entry.attrib:
+	            row[header.index(col)] = entry.attrib[col]
+	        rows.append(row)
+
+        if rows:
+            rows.insert(0, header)
+            log.debug(rows)
+
+        jiraAttribsD[attribute] = rows
+
+
+    log.debug('Exiting get_jira_attribs')
     return(jiraAttribsD)
 
 def connect_db(dbName):
@@ -327,8 +372,9 @@ def create_table(conn, tableName, colDetails):
     '''
     #sqlStmt = create_table_sqlstmt
 
+    log.debug('SQL: {}'.format(sqlStmt))
     conn.execute(sqlStmt)
-    conn.close()
+    #conn.close()
     log.debug('Exiting create_table')
     return
 
@@ -337,12 +383,15 @@ def select_rows(conn, sqlStmt):
     resultL = []
     log.debug ('{}'.format(sqlStmt))
     #conn = sqlite3.connect(dbName)
-    cursor = conn.execute(sqlStmt)
+    try:
+       cursor = conn.execute(sqlStmt)
+    except Exception as e:
+       log.warn('{}: {}'.format(e, sqlStmt))
+    else:
+        for row in cursor:
+            resultL.append(row)
 
-    for row in cursor:
-        resultL.append(row)
-
-    conn.close()
+    #conn.close()
     log.debug('Exiting select_rows')
     return resultL
 
@@ -358,89 +407,167 @@ def insert_update_rows(conn, sqlStmts):
            log.error ('Exception "{}" on SQL: "{}"'.format(e, sqlStmt))
 
     conn.commit()
-    conn.close()
+    #conn.close()
     log.debug('Exiting insert_update_rows')
     return
 
-def gen_insert_SQLs(tableName, dataL):
+def gen_insert_SQLs(tableName, colsL, dataL):
     log.debug('Entering gen_insert_SQLs')
     sqls = []
+    colString = ','.join('"{}"'.format(item) for item in colsL)
+
     for entry in dataL:
-        dataString = ','.join('"{}"'.format(item) for item in entry)
-        #print ('dataS: {}'.format(dataString))
-        sqlT = 'INSERT INTO {} VALUES(null,{},{});'.format(tableName, dataString, 1)
-        #print ('sqlS: {}'.format(sqlT))
+        dataString = ''
+        for col in entry:
+            if col:
+               dataString += "'{}',".format(col)
+            else:
+               dataString += 'null,'
+
+        dataString = dataString[:-1]
+
+        sqlT = 'INSERT INTO {} ({}) VALUES({});'.format(tableName, colString, dataString)
+        log.debug ('sqlS: {}'.format(sqlT))
         sqls.append(sqlT)
     log.debug('Exiting gen_insert_SQLs')
     return sqls
 
-'''
-get_plugins(jiraXMLbackup)
+def compare_table_cols_inputCols(conn, tableName, inputCols):
+    log.debug('Entering compare_table_cols_inputCols')
+    sqlStmt = "PRAGMA table_info('{}')".format(tableName)
+    rows = select_rows(conn, sqlStmt)
+    tableCols = []
+    plusCols = []
+    #minusCols = []
+    for row in rows:
+        tableCols.append(row[1])
+    
+    plusCols = [col for col in inputCols if col not in tableCols]
+    log.debug('Exiting compare_table_cols_inputCols')
+    return (tableCols, plusCols)
+    
+def update_jira_details(conn, tableName, colNameType, dataL, appID):
+    log.debug('Entering update_jira_details')
 
-get_db_stats(jiraXMLbackup)
-get_file_paths(jiraXMLbackup)
+    create_table(conn, tableName, colNameType)
+    colsL = [entry[0] for entry in colNameType]
+  
+    diffCols = compare_table_cols_inputCols(conn, tableName, colsL)
 
-get_jira_attribs(jiraXMLbackup)
+    if not diffCols[1]:
+       for row in dataL:
+           #update data rows for primary key
+           row.insert(0,appID)
+           row.insert(0,None)
 
-get_core_app_properties(jiraXMLbackup)
-'''
+       sqls = gen_insert_SQLs(tableName, colsL, dataL)
+       insert_update_rows(dbConn, sqls)
+    else:
+       log.error('Table Cols: {}\nInput data Cols:{} differ'.format(diffCols[0], colsL))
+       log.error('Input data Cols not present in Table: {}'.format(diffCols[1]))
+
+    log.debug('Exiting update_jira_details')
 
 def main():
+    set_logging()
     log.debug('Entering main')
+    global dbConn
+    dateFormat = '%Y-%m-%d %H:%M:%S'
 
     jiraAttribs = ['Group', 'Project', 'ProjectRole','SchemePermissions', 'SearchRequest', 'User', 'Version', 'Workflow', 'WorkflowScheme', 'CustomField', 'FieldConfigScheme']
 
     jiraTables = {
-            'APP_DETAIL': [['APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT']],
-            'PLUGIN':[['PLUGIN_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'DB_STAT':[['DB_STAT_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'FILE_PATH':[['FILE_PATH_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'TRUSTED_APP':[['TRUSTED_APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'Group':[['GROUP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'Project':[['PROJECT_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'ProjectRole':[['PROJECT_ROLE_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'SchemePermissions':[['SCHEME_PERMISSIONS_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'SearchRequest':[['SEARCH_REQUEST_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'User':[['USER_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'Version':[['VERSION_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'Workflow':[['WORKFLOW_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'WorkflowScheme':[['WORKFLOW_SCHEME_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'CustomField':[['CUSTOM_FIELD_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'FieldConfigScheme':[['FIELD_CONFIG_SCHEME_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']]
+            'JIRA_APP_DETAIL': [['APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['ACTIVE_REC','INTEGER']],
+            'JIRA_PLUGIN':[['PLUGIN_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_DB_STAT':[['DB_STAT_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_FILE_PATH':[['FILE_PATH_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_TRUSTED_APP':[['TRUSTED_APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_Group':[['GROUP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_Project':[['PROJECT_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_ProjectRole':[['PROJECT_ROLE_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_SchemePermissions':[['SCHEME_PERMISSIONS_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_SearchRequest':[['SEARCH_REQUEST_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_User':[['USER_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_Version':[['VERSION_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_Workflow':[['WORKFLOW_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_WorkflowScheme':[['WORKFLOW_SCHEME_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_CustomField':[['CUSTOM_FIELD_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
+            'JIRA_FieldConfigScheme':[['FIELD_CONFIG_SCHEME_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']]
             }
 
-    set_logging()
     read_global_constants()
 
     dbConn = connect_db(db_name)
 
     core_app_props = get_core_app_properties(jiraXMLbackup)
+    #add current date to the parsing information
+    core_app_props[0].append('PARSED_DATE')
+    currentTime = datetime.datetime.fromtimestamp(time.time()).strftime(dateFormat)
+    core_app_props[1].append(currentTime)
+
     for col in core_app_props[0]:
-        jiraTables['APP_DETAIL'].append([col, 'TEXT'])
+        jiraTables['JIRA_APP_DETAIL'].append([col, 'TEXT'])
 
-    jira_attribs = get_jira_attribs(jiraAttribs, jiraXMLbackup)
+    serverID = core_app_props[1][core_app_props[0].index('Server ID')]
+    #check if xml for the current jira has been parsed
+    sqlStmt = 'SELECT APP_ID FROM JIRA_APP_DETAIL WHERE "Server ID" = \'{}\' AND ACTIVE_REC = 1;'.format(serverID) 
+    appID = select_rows(dbConn, sqlStmt)
 
-    '''
-    for tableName in jira_attribs:
-        for col in jira_attribs[tableName][0]:
-            jiraTables[tableName].append([col, 'TEXT'])
+    if appID:
+       #there is already one snapshot of the jira details saved for the server id
+       # make this snapshot inactive and move forward to save the current one
+       log.info('JIRA instance with Server ID: {} is already present in the DB with APP_ID: {}'.format(serverID, appID[0][0]))
+       log.info('Making the record with APP_ID: {} inactive'.format(appID[0][0]))
+
+       sqlUpdateStmt = 'UPDATE JIRA_APP_DETAIL SET ACTIVE_REC = 0 WHERE "Server ID" = \'{}\' AND ACTIVE_REC = 1;'.format(serverID) 
+       insert_update_rows(dbConn, [sqlUpdateStmt])
+       
+       '''
+       log.error('JIRA instance with Server ID: {} is already present in the DB with APP_ID: {}'.format(serverID, appID[0][0]))
+       log.info('Review the data captured for the JIRA instance clean up the data before re-parsing. Exiting....')
+       log.info('Closing DB connection')
+       dbConn.close()
+       sys.exit()
+       '''
+       
+    isActive = 1
+    update_jira_details(dbConn, 'JIRA_APP_DETAIL', jiraTables['JIRA_APP_DETAIL'], core_app_props[1:], isActive)
+    appID = select_rows(dbConn, sqlStmt)
+
+    if appID:
+       appID = appID[0][0]
+       log.info('APP ID: {}'.format(appID))
 
     db_stats = get_db_stats(jiraXMLbackup)
     for col in db_stats[0]:
-        jiraTables['DB_STAT'].append([col, 'TEXT'])
+        jiraTables['JIRA_DB_STAT'].append([col, 'TEXT'])
+
+    update_jira_details(dbConn, 'JIRA_DB_STAT', jiraTables['JIRA_DB_STAT'], db_stats[1:], appID)
 
     plugins = get_plugins(jiraXMLbackup)
     for col in plugins[0]:
-        jiraTables['PLUGIN'].append([col, 'TEXT'])
+        jiraTables['JIRA_PLUGIN'].append([col, 'TEXT'])
+
+    update_jira_details(dbConn, 'JIRA_PLUGIN', jiraTables['JIRA_PLUGIN'], plugins[1:], appID)
 
     filePaths = get_file_paths(jiraXMLbackup)
     for col in filePaths[0]:
-        jiraTables['FILE_PATH'].append([col, 'TEXT'])
+        jiraTables['JIRA_FILE_PATH'].append([col, 'TEXT'])
 
-    for tableName in jiraTables:
-        create_table(dbConn, tableName, jiraTables[tableName])
+    update_jira_details(dbConn, 'JIRA_FILE_PATH', jiraTables['JIRA_FILE_PATH'], filePaths[1:], appID)
 
-    '''
+    jiraAttribsD = get_jira_attribs(jiraAttribs, jiraXMLbackup)
+
+    for tableName in jiraAttribsD.keys():
+        for col in jiraAttribsD[tableName][0]:
+            jiraTables['JIRA_'+tableName].append([col, 'TEXT'])
+
+        #log.debug('Inserting for table {}'.format(tableName))
+        update_jira_details(dbConn, 'JIRA_'+tableName, jiraTables['JIRA_'+tableName], jiraAttribsD[tableName][1:], appID)
+
+
+    log.info('Closing DB connection')
+    dbConn.close()
     log.debug('Exiting main')
 
 main()
