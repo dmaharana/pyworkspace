@@ -31,8 +31,8 @@ def set_logging(mylogFile = '../logs/jiraxmlparse.log'):
     fh.setLevel(logging.DEBUG)
     # create console handler with a higher log level
     ch = logging.StreamHandler()
-    #ch.setLevel(logging.INFO)
-    ch.setLevel(logging.DEBUG)
+    ch.setLevel(logging.INFO)
+    #ch.setLevel(logging.DEBUG)
     # create formatter and add it to the handlers
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(funcName)s - %(lineno)s - %(message)s')
     #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(funcName)20s() - %(lineno)s - %(message)s')
@@ -53,9 +53,9 @@ def read_global_constants(configFile = '../config/jiraxmlparse.ini'):
        sys.exit()
 
     #jiraXMLbackup = '/home/titu/Documents/data/20170302/entities.xml'
-    global jiraXMLbackup
+    global jira_xml_backups
     global db_name
-    global table_name
+    global jira_attributes
 
     global create_table_sqlstmt
     global find_dup_file_sqlstmt
@@ -64,8 +64,12 @@ def read_global_constants(configFile = '../config/jiraxmlparse.ini'):
     config = configparser.ConfigParser()
     config.read(configFile)
 
-    jiraXMLbackup = config.get('DEFAULT','JIRA_XML_BACKUP').strip()
+    jira_xml_backups = [x.strip() for x in config.get('DEFAULT','JIRA_XML_BACKUPS').split('\n') if x]
     db_name = config.get('DEFAULT','db_name').strip()
+    jira_attributes = [x.strip() for x in config.get('DEFAULT','JIRA_ATTRIBUTES').split('\n') if x]
+    log.debug('JXML: {}'.format(jira_xml_backups))
+    log.debug('JA: {}'.format(jira_attributes))
+
     '''
     table_name = config.get('DEFAULT','table_name').strip()
 
@@ -92,9 +96,10 @@ def check_path_create_dir(filePath):
 
 def get_plugins(xmlFile):
     log.debug('Entering get_plugins')
-    startTag = '___ User Plugins ____________________________'
+    #startTag = '___ User Plugins ____________________________'
+    startTag = '___ User Plugins'
     #systemPluginTag = '___ System Plugins __________________________'
-    stopTag = '_' * 25
+    stopTag = '_' * 20
 
     startCollecting = False
     userPluginCount = 0
@@ -105,25 +110,26 @@ def get_plugins(xmlFile):
     with open(xmlFile) as fh:
          for line in fh.readlines():
              #print (line)
-             if line.strip() == startTag:
+             if startTag in line.strip():
                 startCollecting = True
                 continue
 
              if startCollecting and stopTag in line.strip():
-                print (line)
+                #print (line)
                 break
 
              if startCollecting and line:
                 if 'Number' in line.strip():
-                   userPluginCount = line.split(':')[1].strip()
+                   #userPluginCount = line.split(':')[1].strip()
+                   userPluginCount = line[line.index(':')+1:].strip()
                 elif 'Version' in line.strip():
-                   version = line.split(':')[1].strip()
+                   version = line[line.index(':')+1:].strip()
                 elif 'Status' in line.strip():
-                   status = line.split(':')[1].strip()
+                   status = line[line.index(':')+1:].strip()
                 elif 'Vendor' in line.strip():
-                   vendor = line.split(':')[1].strip()
+                   vendor = line[line.index(':')+1:].strip()
                 elif 'Description' in line.strip():
-                   description = line.split(':')[1].strip()
+                   description = line[line.index(':')+1:].strip()
                    row = [name, version, status, vendor, description]
                    #print (row)
                    pluginList.append(row)
@@ -133,10 +139,10 @@ def get_plugins(xmlFile):
 
 
     #print (userPluginCount)
-    print (pluginList, len(pluginList))
+    #print (pluginList, len(pluginList))
 
     if not int(userPluginCount) == len(pluginList):
-       print ('Error: total user plugin count "{}", does not match the count "{}" of plugin list extracted'.format(userPluginCount, len(pluginList)))
+       log.error ('Error: total user plugin count "{}", does not match the count "{}" of plugin list extracted'.format(userPluginCount, len(pluginList)))
 
     if pluginList:
        pluginList.insert(0,header)
@@ -146,9 +152,10 @@ def get_plugins(xmlFile):
 
 def get_core_app_properties(xmlFile):
     log.debug('Entering get_core_app_properties')
-    startTag = '___ Core Application Properties ____________'
+    #startTag = '___ Core Application Properties ____________'
+    startTag = '___ Core Application Properties'
     #stopTag = '___ Application Properties _________________'
-    stopTag = '_' * 25
+    stopTag = '_' * 20
 
     startCollecting = False
     propList = []
@@ -158,7 +165,7 @@ def get_core_app_properties(xmlFile):
     with open(xmlFile) as fh:
          for line in fh.readlines():
              #print (line)
-             if line.strip() == startTag:
+             if startTag in line.strip():
                 startCollecting = True
                 continue
 
@@ -167,30 +174,31 @@ def get_core_app_properties(xmlFile):
 
              if startCollecting and line:
                 if 'Version' in line.strip():
-                   version = line.split(':')[1].strip()
+                   version = line[line.index(':')+1:].strip()
                 elif 'Installation Type' in line.strip():
-                   installationType = line.split(':')[1].strip()
+                   installationType = line[line.index(':')+1:].strip()
                 elif 'Server ID' in line.strip():
-                   serverID = line.split(':')[1].strip()
+                   serverID = line[line.index(':')+1:].strip()
                 elif 'Base URL' in line.strip():
-                   baseURL = ':'.join(line.split(':')[1:]).strip()
+                   baseURL = line[line.index(':')+1:].strip()
                 elif 'External User Management' in line.strip():
-                   externalUserManagement = line.split(':')[1].strip()
+                   externalUserManagement = line[line.index(':')+1:].strip()
                    propList = [[serverID, baseURL, version, installationType, externalUserManagement]]
                    break
 
     if propList:
        propList.insert(0,header)
 
-    print (propList)
+    #print (propList)
     log.debug('Exiting get_core_app_properties')
     return(propList)
 
 def get_db_stats(xmlFile):
     log.debug('Entering get_db_stats')
-    startTag = '___ Database Statistics ____________________'
+    #startTag = '___ Database Statistics ____________________'
+    startTag = '___ Database Statistics'
     #stopTag = '___ Upgrade History ________________________'
-    stopTag = '_' * 25
+    stopTag = '_' * 20
 
     startCollecting = False
     propList = []
@@ -200,7 +208,7 @@ def get_db_stats(xmlFile):
     with open(xmlFile) as fh:
          for line in fh.readlines():
              #print (line)
-             if line.strip() == startTag:
+             if startTag in line.strip():
                 startCollecting = True
                 continue
 
@@ -209,34 +217,35 @@ def get_db_stats(xmlFile):
 
              if startCollecting and line:
                 if 'Issues' in line.strip():
-                   issueCount = line.split(':')[1].strip()
+                   issueCount = line[line.index(':')+1:].strip()
                 elif 'Projects' in line.strip():
-                   projectCount = line.split(':')[1].strip()
+                   projectCount = line[line.index(':')+1:].strip()
                 elif 'Custom Fields' in line.strip():
-                   customFieldCount = line.split(':')[1].strip()
+                   customFieldCount = line[line.index(':')+1:].strip()
                 elif 'Workflows' in line.strip():
-                   workflowCount = line.split(':')[1].strip()
+                   workflowCount = line[line.index(':')+1:].strip()
                 elif 'Users' in line.strip():
-                   userCount = line.split(':')[1].strip()
+                   userCount = line[line.index(':')+1:].strip()
                 elif 'Groups' in line.strip():
-                   groupCount = line.split(':')[1].strip()
+                   groupCount = line[line.index(':')+1:].strip()
                 elif 'Attachments' in line.strip():
-                   attachmentCount = line.split(':')[1].strip()
+                   attachmentCount = line[line.index(':')+1:].strip()
                 elif 'Comments' in line.strip():
-                   commentsCount = line.split(':')[1].strip()
+                   commentsCount = line[line.index(':')+1:].strip()
                    propList = [[issueCount, projectCount, customFieldCount, workflowCount, userCount, groupCount, attachmentCount, commentsCount]]
                    break
     if propList:
        propList.insert(0,header)
 
-    print (propList)
+    #print (propList)
     log.debug('Exiting get_db_stats')
     return(propList)
 
 def get_file_paths(xmlFile):
     log.debug('Entering get_file_paths')
-    startTag = '___ File Paths _____________________________'
-    stopTag = '_' * 25
+    #startTag = '___ File Paths _____________________________'
+    startTag = '___ File Paths'
+    stopTag = '_' * 20
 
     startCollecting = False
     propList = []
@@ -246,7 +255,7 @@ def get_file_paths(xmlFile):
     with open(xmlFile) as fh:
          for line in fh.readlines():
              #print (line)
-             if line.strip() == startTag:
+             if startTag in line.strip():
                 startCollecting = True
                 continue
 
@@ -255,22 +264,23 @@ def get_file_paths(xmlFile):
 
              if startCollecting and line:
                 if 'JIRA Home' in line.strip():
-                   jiraHome = line.split(':')[1].strip()
+                   jiraHome = line[line.index(':')+1:].strip()
                 elif 'Attachment Path' in line.strip():
-                   attachment = line.split(':')[1].strip()
+                   attachment = line[line.index(':')+1:].strip()
                    propList = [[jiraHome, attachment]]
                    break
     if propList:
        propList.insert(0,header)
 
-    print (propList)
+    #print (propList)
     log.debug('Exiting get_file_paths')
     return(propList)
 
 def get_trusted_applications(xmlFile):
     log.debug('Entering get_trusted_applications')
-    startTag = '___ Trusted Applications ___________________'
-    stopTag = '_' * 25
+    #startTag = '___ Trusted Applications ___________________'
+    startTag = '___ Trusted Applications'
+    stopTag = '_' * 20
 
     startCollecting = False
     propList = []
@@ -280,7 +290,7 @@ def get_trusted_applications(xmlFile):
     with open(xmlFile) as fh:
          for line in fh.readlines():
              #print (line)
-             if line.strip() == startTag:
+             if startTag in line.strip():
                 startCollecting = True
                 continue
 
@@ -289,7 +299,7 @@ def get_trusted_applications(xmlFile):
 
              if startCollecting and line:
                 if 'Instance Count' in line.strip():
-                   instanceCount = line.split(':')[1].strip()
+                   instanceCount = line[line.index(':')+1:].strip()
                 else:
                    name = line.split(':')[0].strip()
                    propList.append([name])
@@ -297,7 +307,7 @@ def get_trusted_applications(xmlFile):
     if propList:
        propList.insert(0,header)
 
-    print (propList)
+    #print (propList)
     log.debug('Exiting get_trusted_applications')
     return(propList)
 
@@ -386,7 +396,7 @@ def select_rows(conn, sqlStmt):
     try:
        cursor = conn.execute(sqlStmt)
     except Exception as e:
-       log.warn('{}: {}'.format(e, sqlStmt))
+       log.info('{}: {}'.format(e, sqlStmt))
     else:
         for row in cursor:
             resultL.append(row)
@@ -420,6 +430,8 @@ def gen_insert_SQLs(tableName, colsL, dataL):
         dataString = ''
         for col in entry:
             if col:
+               if not str(col).isdigit():
+                  col = col.replace("'", "''")
                dataString += "'{}',".format(col)
             else:
                dataString += 'null,'
@@ -446,7 +458,7 @@ def compare_table_cols_inputCols(conn, tableName, inputCols):
     log.debug('Exiting compare_table_cols_inputCols')
     return (tableCols, plusCols)
     
-def update_jira_details(conn, tableName, colNameType, dataL, appID):
+def update_jira_details_old(conn, tableName, colNameType, dataL, appID):
     log.debug('Entering update_jira_details')
 
     create_table(conn, tableName, colNameType)
@@ -463,8 +475,80 @@ def update_jira_details(conn, tableName, colNameType, dataL, appID):
        sqls = gen_insert_SQLs(tableName, colsL, dataL)
        insert_update_rows(dbConn, sqls)
     else:
-       log.error('Table Cols: {}\nInput data Cols:{} differ'.format(diffCols[0], colsL))
-       log.error('Input data Cols not present in Table: {}'.format(diffCols[1]))
+       log.error('Table: {}\nTable Cols: {}\nInput data Cols:{} differ'.format(tableName, diffCols[0], colsL))
+       log.error('Input data Col(s) not present in Table: {}'.format(diffCols[1]))
+
+    log.debug('Exiting update_jira_details')
+
+def update_jira_details_v2(conn, tableName, colNameType, dataL, appID):
+    log.debug('Entering update_jira_details')
+
+    difColTColIdx = {'TAB_COLS':0,'DIFF_COLS':1}
+    create_table(conn, tableName, colNameType)
+    colsL = [entry[0] for entry in colNameType]
+  
+    diffCols = compare_table_cols_inputCols(conn, tableName, colsL)
+
+    if diffCols[difColTColIdx['DIFF_COLS']]:
+       #update the table
+       colStringOrig = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['TAB_COLS']])
+       addColString = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['DIFF_COLS']])
+
+       colStringNew = ','.join('"{}"'.format(item) for item in colsL)
+
+       log.info('Updating table {} cols from \'{}\' to \'{}\': Adding Col(s) {}'.format(tableName, colStringOrig, colStringNew, addColString))
+
+       create_table(conn, tableName+'_bkp', colNameType)
+       sqls = ['INSERT INTO {0} ({1}) SELECT {1} FROM {2};'.format(tableName+'_bkp', colStringOrig, tableName),
+              'DROP TABLE {};'.format(tableName)]
+       insert_update_rows(dbConn, sqls)
+
+       create_table(conn, tableName, colNameType)
+       sqls = ['INSERT INTO {0} ({1}) SELECT {1} FROM {2};'.format(tableName, colStringNew, tableName+'_bkp'),
+              'DROP TABLE {};'.format(tableName+'_bkp')]
+       insert_update_rows(dbConn, sqls)
+       
+
+    for row in dataL:
+        #update data rows for primary key
+        row.insert(0,appID)
+        row.insert(0,None)
+
+    sqls = gen_insert_SQLs(tableName, colsL, dataL)
+    insert_update_rows(dbConn, sqls)
+
+    log.debug('Exiting update_jira_details')
+
+def update_jira_details(conn, tableName, colNameType, dataL, appID):
+    log.debug('Entering update_jira_details')
+
+    difColTColIdx = {'TAB_COLS':0,'DIFF_COLS':1}
+    create_table(conn, tableName, colNameType)
+    colsL = [entry[0] for entry in colNameType]
+  
+    diffCols = compare_table_cols_inputCols(conn, tableName, colsL)
+
+    if diffCols[difColTColIdx['DIFF_COLS']]:
+       #update the table
+       colStringOrig = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['TAB_COLS']])
+       addColString = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['DIFF_COLS']])
+
+       log.info('Adding col(s) \'{}\' to table \'{}\' cols \'{}\''.format(addColString, tableName, colStringOrig))
+
+       sqls = []
+       for col in diffCols[difColTColIdx['DIFF_COLS']]:
+           sqls.append('alter table {} add column {}'.format(tableName, col))
+
+       insert_update_rows(dbConn, sqls)
+       
+
+    for row in dataL:
+        #update data rows for primary key
+        row.insert(0,appID)
+        row.insert(0,None)
+
+    sqls = gen_insert_SQLs(tableName, colsL, dataL)
+    insert_update_rows(dbConn, sqls)
 
     log.debug('Exiting update_jira_details')
 
@@ -474,96 +558,100 @@ def main():
     global dbConn
     dateFormat = '%Y-%m-%d %H:%M:%S %Z'
 
-    jiraAttribs = ['Group', 'Project', 'ProjectRole','SchemePermissions', 'SearchRequest', 'User', 'Version', 'Workflow', 'WorkflowScheme', 'CustomField', 'FieldConfigScheme']
-
     jiraTables = {
             'JIRA_APP_DETAIL': [['APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['ACTIVE_REC','INTEGER']],
             'JIRA_PLUGIN':[['PLUGIN_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
             'JIRA_DB_STAT':[['DB_STAT_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
             'JIRA_FILE_PATH':[['FILE_PATH_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_TRUSTED_APP':[['TRUSTED_APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_Group':[['GROUP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_Project':[['PROJECT_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_ProjectRole':[['PROJECT_ROLE_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_SchemePermissions':[['SCHEME_PERMISSIONS_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_SearchRequest':[['SEARCH_REQUEST_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_User':[['USER_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_Version':[['VERSION_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_Workflow':[['WORKFLOW_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_WorkflowScheme':[['WORKFLOW_SCHEME_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_CustomField':[['CUSTOM_FIELD_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']],
-            'JIRA_FieldConfigScheme':[['FIELD_CONFIG_SCHEME_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']]
+            'JIRA_TRUSTED_APP':[['TRUSTED_APP_ID','INTEGER PRIMARY KEY AUTOINCREMENT'],['APP_ID','INTEGER']]
             }
+    #Tables for the JIRA properties extracted as XML will be created generically below
 
     read_global_constants()
 
     dbConn = connect_db(db_name)
 
-    core_app_props = get_core_app_properties(jiraXMLbackup)
-    #add current date to the parsing information
-    core_app_props[0].append('PARSED_DATE')
-    currentTime = time.strftime(dateFormat, time.localtime())
-    core_app_props[1].append(currentTime)
+    for jiraXMLbackup in jira_xml_backups:
+        log.info('Parsing XML: {}'.format(jiraXMLbackup))
+        #Extract data from the XML file's comments section
+        core_app_props = get_core_app_properties(jiraXMLbackup)
+        if not core_app_props:
+           log.error('Could not collect Core Application Properties. Exiting....')
+           sys.exit()
 
-    for col in core_app_props[0]:
-        jiraTables['JIRA_APP_DETAIL'].append([col, 'TEXT'])
+        #add current date to the parsing information
+        log.debug('CoreAppProps: {}'.format(core_app_props))
+        core_app_props[0].append('PARSED_DATE')
+        currentTime = time.strftime(dateFormat, time.localtime())
+        core_app_props[1].append(currentTime)
 
-    serverID = core_app_props[1][core_app_props[0].index('Server ID')]
-    #check if xml for the current jira has been parsed
-    sqlStmt = 'SELECT APP_ID FROM JIRA_APP_DETAIL WHERE "Server ID" = \'{}\' AND ACTIVE_REC = 1;'.format(serverID) 
-    appID = select_rows(dbConn, sqlStmt)
+        cols = list(jiraTables['JIRA_APP_DETAIL'])
+        for col in core_app_props[0]:
+            cols.append([col, 'TEXT'])
+    
+        serverID = core_app_props[1][core_app_props[0].index('Server ID')]
+        #check if xml for the current jira has been parsed
+        sqlStmt = 'SELECT APP_ID FROM JIRA_APP_DETAIL WHERE "Server ID" = \'{}\' AND ACTIVE_REC = 1;'.format(serverID) 
+        appID = select_rows(dbConn, sqlStmt)
 
-    if appID:
-       #there is already one snapshot of the jira details saved for the server id
-       # make this snapshot inactive and move forward to save the current one
-       log.info('JIRA instance with Server ID: {} is already present in the DB with APP_ID: {}'.format(serverID, appID[0][0]))
-       log.info('Making the record with APP_ID: {} inactive'.format(appID[0][0]))
+        if appID:
+           #there is already one snapshot of the jira details saved for the server id
+           # make this snapshot inactive and move forward to save the current one
+           log.info('JIRA instance with Server ID: {} is already present in the DB with APP_ID: {}'.format(serverID, appID[0][0]))
+           log.info('Making the record with APP_ID: {} inactive'.format(appID[0][0]))
 
-       sqlUpdateStmt = 'UPDATE JIRA_APP_DETAIL SET ACTIVE_REC = 0 WHERE "Server ID" = \'{}\' AND ACTIVE_REC = 1;'.format(serverID) 
-       insert_update_rows(dbConn, [sqlUpdateStmt])
+           sqlUpdateStmt = 'UPDATE JIRA_APP_DETAIL SET ACTIVE_REC = 0 WHERE "Server ID" = \'{}\' AND ACTIVE_REC = 1;'.format(serverID) 
+           insert_update_rows(dbConn, [sqlUpdateStmt])
        
-       '''
-       log.error('JIRA instance with Server ID: {} is already present in the DB with APP_ID: {}'.format(serverID, appID[0][0]))
-       log.info('Review the data captured for the JIRA instance clean up the data before re-parsing. Exiting....')
-       log.info('Closing DB connection')
-       dbConn.close()
-       sys.exit()
-       '''
        
-    isActive = 1
-    update_jira_details(dbConn, 'JIRA_APP_DETAIL', jiraTables['JIRA_APP_DETAIL'], core_app_props[1:], isActive)
-    appID = select_rows(dbConn, sqlStmt)
+        isActive = 1
+        #update_jira_details(dbConn, 'JIRA_APP_DETAIL', jiraTables['JIRA_APP_DETAIL'], core_app_props[1:], isActive)
+        update_jira_details(dbConn, 'JIRA_APP_DETAIL', cols, core_app_props[1:], isActive)
+        appID = select_rows(dbConn, sqlStmt)
 
-    if appID:
-       appID = appID[0][0]
-       log.info('APP ID: {}'.format(appID))
+        if appID:
+           appID = appID[0][0]
+           log.info('APP ID: {}'.format(appID))
 
-    db_stats = get_db_stats(jiraXMLbackup)
-    for col in db_stats[0]:
-        jiraTables['JIRA_DB_STAT'].append([col, 'TEXT'])
+        db_stats = get_db_stats(jiraXMLbackup)
+        if db_stats:
+           cols = list(jiraTables['JIRA_DB_STAT'])
+           for col in db_stats[0]:
+               cols.append([col, 'TEXT'])
 
-    update_jira_details(dbConn, 'JIRA_DB_STAT', jiraTables['JIRA_DB_STAT'], db_stats[1:], appID)
+           update_jira_details(dbConn, 'JIRA_DB_STAT', cols, db_stats[1:], appID)
 
-    plugins = get_plugins(jiraXMLbackup)
-    for col in plugins[0]:
-        jiraTables['JIRA_PLUGIN'].append([col, 'TEXT'])
+        plugins = get_plugins(jiraXMLbackup)
+        if plugins:
+           cols = list(jiraTables['JIRA_PLUGIN'])
+           for col in plugins[0]:
+               cols.append([col, 'TEXT'])
 
-    update_jira_details(dbConn, 'JIRA_PLUGIN', jiraTables['JIRA_PLUGIN'], plugins[1:], appID)
+           update_jira_details(dbConn, 'JIRA_PLUGIN', cols, plugins[1:], appID)
 
-    filePaths = get_file_paths(jiraXMLbackup)
-    for col in filePaths[0]:
-        jiraTables['JIRA_FILE_PATH'].append([col, 'TEXT'])
+        filePaths = get_file_paths(jiraXMLbackup)
+        if filePaths:
+           cols = list(jiraTables['JIRA_FILE_PATH'])
+           for col in filePaths[0]:
+               cols.append([col, 'TEXT'])
 
-    update_jira_details(dbConn, 'JIRA_FILE_PATH', jiraTables['JIRA_FILE_PATH'], filePaths[1:], appID)
+           update_jira_details(dbConn, 'JIRA_FILE_PATH', cols, filePaths[1:], appID)
+    
+        #Extract data from the XML file's XML tags
+        jiraAttribsD = get_jira_attribs(jira_attributes, jiraXMLbackup)
 
-    jiraAttribsD = get_jira_attribs(jiraAttribs, jiraXMLbackup)
+        for tableName in jiraAttribsD.keys():
+            if jiraAttribsD[tableName]:
+               cols = []
+               cols.append(['{}_ID'.format(tableName),'INTEGER PRIMARY KEY AUTOINCREMENT'])
+               cols.append(['APP_ID','INTEGER'])
+               for col in jiraAttribsD[tableName][0]:
+                   #jiraTables['JIRA_'+tableName].append([col, 'TEXT'])
+                   cols.append([col, 'TEXT'])
 
-    for tableName in jiraAttribsD.keys():
-        for col in jiraAttribsD[tableName][0]:
-            jiraTables['JIRA_'+tableName].append([col, 'TEXT'])
-
-        #log.debug('Inserting for table {}'.format(tableName))
-        update_jira_details(dbConn, 'JIRA_'+tableName, jiraTables['JIRA_'+tableName], jiraAttribsD[tableName][1:], appID)
+               #log.debug('Inserting for table {}'.format(tableName))
+               #update_jira_details(dbConn, 'JIRA_'+tableName, jiraTables['JIRA_'+tableName], jiraAttribsD[tableName][1:], appID)
+               update_jira_details(dbConn, 'JIRA_'+tableName, cols, jiraAttribsD[tableName][1:], appID)
 
 
     log.info('Closing DB connection')
