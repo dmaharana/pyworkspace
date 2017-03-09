@@ -458,67 +458,6 @@ def compare_table_cols_inputCols(conn, tableName, inputCols):
     log.debug('Exiting compare_table_cols_inputCols')
     return (tableCols, plusCols)
     
-def update_jira_details_old(conn, tableName, colNameType, dataL, appID):
-    log.debug('Entering update_jira_details')
-
-    create_table(conn, tableName, colNameType)
-    colsL = [entry[0] for entry in colNameType]
-  
-    diffCols = compare_table_cols_inputCols(conn, tableName, colsL)
-
-    if not diffCols[1]:
-       for row in dataL:
-           #update data rows for primary key
-           row.insert(0,appID)
-           row.insert(0,None)
-
-       sqls = gen_insert_SQLs(tableName, colsL, dataL)
-       insert_update_rows(dbConn, sqls)
-    else:
-       log.error('Table: {}\nTable Cols: {}\nInput data Cols:{} differ'.format(tableName, diffCols[0], colsL))
-       log.error('Input data Col(s) not present in Table: {}'.format(diffCols[1]))
-
-    log.debug('Exiting update_jira_details')
-
-def update_jira_details_v2(conn, tableName, colNameType, dataL, appID):
-    log.debug('Entering update_jira_details')
-
-    difColTColIdx = {'TAB_COLS':0,'DIFF_COLS':1}
-    create_table(conn, tableName, colNameType)
-    colsL = [entry[0] for entry in colNameType]
-  
-    diffCols = compare_table_cols_inputCols(conn, tableName, colsL)
-
-    if diffCols[difColTColIdx['DIFF_COLS']]:
-       #update the table
-       colStringOrig = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['TAB_COLS']])
-       addColString = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['DIFF_COLS']])
-
-       colStringNew = ','.join('"{}"'.format(item) for item in colsL)
-
-       log.info('Updating table {} cols from \'{}\' to \'{}\': Adding Col(s) {}'.format(tableName, colStringOrig, colStringNew, addColString))
-
-       create_table(conn, tableName+'_bkp', colNameType)
-       sqls = ['INSERT INTO {0} ({1}) SELECT {1} FROM {2};'.format(tableName+'_bkp', colStringOrig, tableName),
-              'DROP TABLE {};'.format(tableName)]
-       insert_update_rows(dbConn, sqls)
-
-       create_table(conn, tableName, colNameType)
-       sqls = ['INSERT INTO {0} ({1}) SELECT {1} FROM {2};'.format(tableName, colStringNew, tableName+'_bkp'),
-              'DROP TABLE {};'.format(tableName+'_bkp')]
-       insert_update_rows(dbConn, sqls)
-       
-
-    for row in dataL:
-        #update data rows for primary key
-        row.insert(0,appID)
-        row.insert(0,None)
-
-    sqls = gen_insert_SQLs(tableName, colsL, dataL)
-    insert_update_rows(dbConn, sqls)
-
-    log.debug('Exiting update_jira_details')
-
 def update_jira_details(conn, tableName, colNameType, dataL, appID):
     log.debug('Entering update_jira_details')
 
@@ -533,11 +472,11 @@ def update_jira_details(conn, tableName, colNameType, dataL, appID):
        colStringOrig = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['TAB_COLS']])
        addColString = ','.join('"{}"'.format(item) for item in diffCols[difColTColIdx['DIFF_COLS']])
 
-       log.info('Adding col(s) \'{}\' to table \'{}\' cols \'{}\''.format(addColString, tableName, colStringOrig))
+       log.info('Adding col(s): \'{}\' to table \'{}\' cols \'{}\''.format(addColString, tableName, colStringOrig))
 
        sqls = []
        for col in diffCols[difColTColIdx['DIFF_COLS']]:
-           sqls.append('alter table {} add column {}'.format(tableName, col))
+           sqls.append('ALTER TABLE {} ADD COLUMN {}'.format(tableName, col))
 
        insert_update_rows(dbConn, sqls)
        
